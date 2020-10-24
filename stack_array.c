@@ -54,3 +54,78 @@ int main(){
    }
    */
 }
+/*______________________________________________________________________________________________________________________________________________*/
+// C program for linked list implementation of stack 
+#include <limits.h> 
+#include <stdio.h> 
+#include <stdlib.h> 
+
+// A structure to represent a stack 
+struct StackNode { 
+	int data; 
+	struct StackNode* next; 
+}; 
+
+struct StackNode* newNode(int data) 
+{ 
+	struct StackNode* stackNode = (struct StackNode*)malloc(sizeof(struct StackNode)); 
+	stackNode->data = data; 
+	stackNode->next = NULL; 
+	return stackNode; 
+} 
+struct Stack { 
+    struct StackNode* root; 
+};
+struct Stack* createQueue() 
+{ 
+    struct Stack* q = (struct Stack*)malloc(sizeof(struct Stack)); 
+    q->root = NULL; 
+    return q; 
+} 
+
+int isEmpty(struct Queue* q) 
+{ 
+	return q->root==NULL; 
+} 
+
+void push(struct  Queue* q,int data) 
+{ 
+	struct StackNode* stackNode = newNode(data); 
+	stackNode->next = q->root; 
+	q->root = stackNode; 
+	printf("%d pushed to stack\n", q->root->data); 
+} 
+
+int pop(struct  Queue* q) 
+{ 
+	if (isEmpty( q->root)) 
+		return INT_MIN; 
+	struct StackNode* temp = q->root; 
+	q->root = q->root->next; 
+	int popped = temp->data; 
+	free(temp); 
+
+	return popped; 
+} 
+
+int peek(struct  Queue* q) 
+{ 
+	if (isEmpty(q->root)) 
+		return INT_MIN; 
+	return (q->root)->data; 
+} 
+
+int main() 
+{ 
+	struct Stacke* stack = createStack(); 
+
+	push(stack,10); 
+	push( stack,20); 
+	push( stack,30); 
+
+	printf("%d popped from stack\n", pop(stack)); 
+
+	printf("Top element is %d\n", peek(stack)); 
+
+	return 0; 
+} 
