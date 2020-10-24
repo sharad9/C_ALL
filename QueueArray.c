@@ -4,13 +4,13 @@
 
 struct Queue{
     unsigned capacity;
-    int front,rear,size;
+    int front,rear;
     int *array;
 };
 struct Queue* createQueue(unsigned capacity){
     struct Queue* queue = (struct Queue*)malloc(sizeof(struct Queue));
     queue->capacity = capacity;
-    queue->front = queue->size = 0;
+    
     queue->rear = capacity-1;
     queue->array = (int*)malloc(queue->capacity*sizeof(int)); 
     return queue;
@@ -19,20 +19,20 @@ int isFull(struct Queue* queue){
     return queue->rear == queue->capacity;
 }
 int isEmpty(struct Queue* queue){
-    return queue->size == 0;
+    return queue->front == -1;
 }
 void enqueue(struct Queue* queue, int data){
     if(isFull(queue)){printf("Queue is FULL\n");return;}
     queue->rear = (queue->rear+1)%queue->capacity;
     queue->array[queue->rear] = data;
-    queue->size = queue->size+1;
+    
     printf("%d enqueued to queue\n", data);
 }
 int dequeue(struct Queue* queue){
     if(isEmpty(queue)){printf("Queue is EMPTY\n");return INT_MIN;}
     int data = queue->array[queue->front];
     queue->front = (queue->front+1)%queue->capacity;
-    queue->size = queue->size-1;
+    
     return data;
 }
 int Front(struct Queue* queue){
