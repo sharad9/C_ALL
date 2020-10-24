@@ -129,3 +129,72 @@ int main()
 
 	return 0; 
 } 
+
+
+/*___________________________________________________________________________________________________________________________________________________*/
+// C program for linked list implementation of stack 
+#include <limits.h> 
+#include <stdio.h> 
+#include <stdlib.h> 
+
+// A structure to represent a stack 
+struct StackNode { 
+	int data; 
+	struct StackNode* next; 
+}; 
+struct StackNode* root;
+struct StackNode* newNode(int data) 
+{ 
+	struct StackNode* stackNode = (struct StackNode*)malloc(sizeof(struct StackNode)); 
+	stackNode->data = data; 
+	stackNode->next = NULL; 
+	return stackNode; 
+} 
+
+int isEmpty() 
+{ 
+	return !root; 
+} 
+
+void push(int data) 
+{ 
+	struct StackNode* stackNode = newNode(data); 
+	stackNode->next = root; 
+	root = stackNode; 
+	printf("%d pushed to stack\n", root->data); 
+} 
+
+int pop() 
+{ 
+	if (isEmpty()) 
+		return INT_MIN; 
+	struct StackNode* temp = root; 
+	root = root->next; 
+	int popped = temp->data; 
+	free(temp); 
+
+	return popped; 
+} 
+
+int peek() 
+{ 
+	if (isEmpty()) 
+		return INT_MIN; 
+	return root->data; 
+} 
+
+int main() 
+{ 
+	struct StackNode* root = NULL;
+
+	push( 10); 
+	push( 20); 
+	push( 30); 
+
+	printf("%d popped from stack\n", pop()); 
+
+	printf("Top element is %d\n", peek()); 
+
+	return 0; 
+} 
+
